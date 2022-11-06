@@ -50,7 +50,7 @@ export const CreateUserZkCredential = (address: string, info: KYC_Info) => {
   const zkCircuit = getZkCircuit();
   if (false === hasCircuit(KYC_Credential.purpose(), zkCircuit.toCode())) createCircuit(KYC_Credential.purpose(), zkCircuit);
 
-  const userZkCircuit = getZkCircuit();
+  const userZkCircuit = getZkUserCircuit();
   if (false === hasCircuit(KYC_Credential.purpose(), userZkCircuit.toCode())) createCircuit(KYC_Credential.purpose(), userZkCircuit);
 
   return zkCred;
