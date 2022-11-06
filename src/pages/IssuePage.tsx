@@ -18,6 +18,7 @@ const IssuePage: React.FC = () => {
   const [address, setAddress] = React.useState<string>('');
   const [name, setName] = React.useState<string>('');
   const [role, setRole] = React.useState<'admin' | 'mod' | 'user'>('user');
+  const [userCred, setUserCred] = React.useState<string>('');
   const [mounted, _mounted] = useState(false);
   useEffect(() => {
     waitDIDKitMounted().then(() => {
@@ -37,6 +38,7 @@ const IssuePage: React.FC = () => {
       role,
       age: moment().year() - value.year(),
     });
+    setUserCred(JSON.stringify(JSON.stringify(zkCred)));
     console.log('Created credential: ', zkCred);
   };
 
@@ -82,6 +84,7 @@ const IssuePage: React.FC = () => {
       <Button variant="contained" onClick={handleIssueCredentials}>
         Issue Credentials
       </Button>
+      <p>Your zkCred: {userCred}</p>
     </div>
   );
 };
