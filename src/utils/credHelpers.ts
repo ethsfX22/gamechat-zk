@@ -81,3 +81,17 @@ export async function verifyUserCredential(
     proof: zkProof,
   }
 }
+
+export async function verifyModProof(zkProofString, address) {
+  const zkProof = JSON.parse(zkProofString);
+  const res = zkProofString.code === getZkCircuit().toCode() &&
+    verifyZKProof(zkProof, address, KYC_Credential.purpose());
+  return res;
+}
+
+export async function verifyUserProof(zkProofString, address) {
+  const zkProof = JSON.parse(zkProofString);
+  const res = zkProof.code === getZkUserCircuit().toCode() &&
+    verifyZKProof(zkProof, address, KYC_Credential.purpose());
+  return res;
+}

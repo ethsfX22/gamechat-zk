@@ -9,7 +9,10 @@
     "lint": "yarn run lint-eslint && yarn run lint-stylelint",
     "lint-eslint": "eslint -c .eslintrc.js --ext .js {src,build}/**/*.js",
     "lint-stylelint": "stylelint --config .stylelintrc.json src/**/*.{less,scss} --syntax scss",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:server": "npx tsc",
+    "start:server": "node dist/server.js",
+    "dev:server": "PORT=5000 concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
   },
   "author": "",
   "license": "ISC",
