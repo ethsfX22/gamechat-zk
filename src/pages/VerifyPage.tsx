@@ -20,6 +20,7 @@ const VerifyPage: React.FC = () => {
   const [address, setAddress] = React.useState<string>('');
   const [zkCredString, setZkCredString] = React.useState<string>('');
   const [zkProofString, setZkProofString] = React.useState<string>('');
+  const [zkProofUserString, setZkProofUserString] = React.useState<string>('');
   const [mounted, _mounted] = useState(false);
   useEffect(() => {
     waitDIDKitMounted().then(() => {
@@ -41,7 +42,7 @@ const VerifyPage: React.FC = () => {
     const zkCircuit = getZkUserCircuit();
     const valid = await verifyUserCredential(zkCred, zkCircuit.toCode(), address);
     alert('Credential is valid: ' + valid.result);
-    setZkProofString(JSON.stringify(valid.proof));
+    setZkProofUserString(JSON.stringify(valid.proof));
   };
 
   return (
@@ -69,6 +70,7 @@ const VerifyPage: React.FC = () => {
         Verify User Credentials
       </Button>
       <p>Your proof string for mod: {zkProofString}</p>
+      <p>Your proof string for user: {zkProofUserString}</p>
     </div>
   );
 };
