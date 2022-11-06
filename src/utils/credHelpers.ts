@@ -15,12 +15,9 @@ function randomNumber(min: number, max: number): number {
 export function getZkUserCircuit() {
   const KYC_AGE_Over_18 = new ConstraintINT_RNG('age', 18, 1000);
 
-  const KYC_User_Role_range = ['user'];
-  const KYC_USER_ROLE = new ConstraintSTR_RNG('role', KYC_User_Role_range);
-
   // Credential issuer creates a circuit (and publishes its code) based on above constraints
   const purpose = KYC_Credential.purpose();
-  const zkCircuit = new ZKCircuit([KYC_USER_ROLE, KYC_AGE_Over_18]);
+  const zkCircuit = new ZKCircuit([KYC_AGE_Over_18]);
   return zkCircuit
 }
 
@@ -76,5 +73,8 @@ export async function verifyUserCredential(
   const res = verifyZKProof(zkProof, address, KYC_Credential.purpose());
 
   // The verification result
-  return res;
+  return {
+    result: res,
+    proof: zkProof,
+  }
 }
